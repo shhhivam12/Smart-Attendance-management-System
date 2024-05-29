@@ -1,0 +1,80 @@
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-left: 170px;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form-section {
+
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.form-section h2 {
+    margin-top: 0;
+}
+.form-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.form-section label {
+    font-weight: 500;
+}
+.form-section select, .form-section input[type="file"], .form-section button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.form-section button {
+    background-color: rgb(67, 149, 220);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.form-section button:hover {
+    background-color: rgb(0, 104, 250);
+}
+.student-details {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+.student-details h2 {
+    margin-top: 0;
+}
+.student-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.student-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.student-card p {
+    margin: 0;
+}
+.student-card p:first-child {
+    font-weight: 500;
+}

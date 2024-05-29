@@ -1,0 +1,11 @@
+
+delete from class_data where class_id=4;
+
+ALTER TABLE class_data
+ADD COLUMN teacher_id INT,
+ADD CONSTRAINT fk_teacher
+FOREIGN KEY (teacher_id) REFERENCES login_data(id);
+
+SELECT * FROM `sams`.`class_data`;
+
+INSERT INTO class_data (teacher_id, class_name, class_strength, class_course, class_semester) VALUES (8, 'BCA-1', 100, 'BCA', 1);

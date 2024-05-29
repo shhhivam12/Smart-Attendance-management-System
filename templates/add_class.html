@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Class</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="container">
+    <h1>Add a New Class</h1>
+    <form method="POST" action="{{ url_for('add_class') }}" class="form-group">
+        <label for="class_name">Class Name:</label>
+        <input type="text" id="class_name" name="class_name" class="form-control" required><br>
+        <label for="start_time">Start Time:</label>
+        <input type="time" id="start_time" name="start_time" class="form-control" required><br>
+        <label for="end_time">End Time:</label>
+        <input type="time" id="end_time" name="end_time" class="form-control" required><br>
+        <label for="day_of_week">Day of Week:</label>
+        <select id="day_of_week" name="day_of_week" class="form-control" required>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select><br>
+        <input type="submit" value="Add Class" class="btn btn-success">
+    </form>
+    <a href="home" class="btn btn-secondary">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,13 @@
+CREATE TABLE class_schedule (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_name VARCHAR(100) NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    day_of_week VARCHAR(10) NOT NULL
+);
+ALTER TABLE class_schedule ADD COLUMN completed BOOLEAN DEFAULT FALSE;
+
+delete from class_schedule where id=1;
+select * from class_schedule;
+ALTER TABLE class_schedule ADD COLUMN teacher_id INT;
+ALTER TABLE class_schedule ADD FOREIGN KEY (teacher_id) REFERENCES teachers(id);

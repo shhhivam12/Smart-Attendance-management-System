@@ -1,0 +1,43 @@
+
+{% extends 'base.html'%}
+{%block head%}
+<title>{{session['name']}}:profile</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/home.css') }}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/h_myprofile.css') }}">
+{%endblock%}
+{%block body%}
+<section class="sec1">
+    <nav class="menu" tabindex="0">
+      <header class="avatar">
+            <img src="{{ url_for('static',filename='assets/user-icon.png') }}" />
+        <h2>{{session['name']}}</h2>
+      </header>
+        <ul>
+       <a href="home"><li tabindex="0" class="icon-users"><span>Home</span></li></a>
+        <a href="h_attendance"><li tabindex="0" class="icon-dashboard"><span>Take Attendance</span></li></a>
+        <a href="h_students" id="n-links"><li class="icon-dashboard"><span>Student details</span></li></a>
+        <a href="h_manageclass"><li tabindex="0" class="icon-customers"><span>Manage classes</span></li></a>
+        <li tabindex="0" class="selected"><span>My profile</span></li>
+        <a href="logout"><li class="icon-settings"><span>Log-Out</span></li></a>
+      </ul>
+    </nav>
+
+    <div class="profmain">
+      <form class="profile-form" action="/update_profile" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ teacher.name }}" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="{{ teacher.email }}" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter new password">
+
+      <label for="confirm_password">Confirm Password:</label>
+      <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm new password">
+      
+      <button type="submit">Update Profile</button>
+    </form>
+  </div>
+</section>
+{%endblock%}

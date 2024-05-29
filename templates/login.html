@@ -1,0 +1,43 @@
+
+{% extends 'base.html'%}
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/login.css') }}">{%endblock%}
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+{%block body%}
+<section class="sec1 container forms" >
+    <div class="form login">
+                <div class="form-content">
+                    <header>Login</header>
+                    <form action="/loginval" method="post">
+                        <div class="field input-field">
+                            <input type="email" placeholder="Email" class="input" name="mail" required>
+                        </div>
+
+                        <div class="field input-field">
+                            <input type="password" placeholder="Password" name="pass" class="password" required>
+                        </div>
+                        
+                        <div class="field button-field">
+                            <button type="submit">Login</button>
+                        </div>
+                    </form>
+                    
+                    <div class="form-link">
+                        <span>Don't have an account? <a href="signup" class="link signup-link">Signup</a></span>
+                    </div>
+                </div>
+                
+                
+                {% if status == "success"%}
+                <div class="goodalert" role="alert">*Account created successfully</div>
+                {% endif %}
+                {% if status == "fail"%}
+                <div class="alert" role="alert">*Incorrect e-mail or Password</div>
+                {% endif %}
+                {% if status == "error"%}
+                <div class="alert" role="alert">*some error occured</div>
+                {% endif %}
+            </div>
+    
+        </section>
+{%endblock%}

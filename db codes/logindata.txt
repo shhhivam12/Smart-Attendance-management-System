@@ -1,0 +1,25 @@
+use sams;
+create table login_data(username varchar(20) , password varchar(20));
+insert into login_data values ('admin@gmail.com','1234');
+alter table login_data change username email varchar(30);
+
+delete from login_data where id='8';
+
+UPDATE `sams`.`login_data`
+SET
+`name` = 'shivam'
+WHERE email='a@g.f';
+
+select * from login_data;
+INSERT INTO `sams`.`login_data`
+(`email`,
+`password`,
+`name`)
+VALUES
+('purohit@gmail.com',
+'kcpurohit',
+'K C Purohit');
+
+select * from login_data where email = 'ssss@d.d';
+
+set sql_safe_updates=0;

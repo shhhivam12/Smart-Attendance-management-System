@@ -1,0 +1,80 @@
+
+{% extends 'base.html'%}
+{%block head%}
+<title>{{session['name']}}:classes</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/home.css') }}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/h_manageclass.css') }}">
+{%endblock%}
+{%block body%}
+<section class="sec1">
+    <nav class="menu" tabindex="0">
+      <header class="avatar">
+            <img src="{{ url_for('static',filename='assets/user-icon.png') }}" />
+        <h2>{{session['name']}}</h2>
+      </header>
+        <ul>
+       <a href="home"><li tabindex="0" class="icon-users"><span>Home</span></li></a>
+        <a href="h_attendance"><li tabindex="0" class="icon-dashboard"><span>Take Attendance</span></li></a>
+        <a href="h_students" id="n-links"><li class="icon-dashboard"><span>Student details</span></li></a>
+        <li tabindex="0" class="selected"><span>Manage classes</span></li>
+        <a href="h_myprofile"><li tabindex="0" class="icon-settings"><span>My profile</span></li></a>
+        <a href="logout"><li class="icon-settings"><span>Log-Out</span></li></a>
+      </ul>
+    </nav>
+
+<div class="managemain">
+    
+    <h2>Manage Classes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Class Name</th>
+                <th>Class Strength</th>
+                <th>Class Course</th>
+                <th>Class Semester</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for class in classes %}
+            <tr>
+                <td>{{ class.class_name }}</td>
+                <td>{{ class.class_strength }}</td>
+                <td>{{ class.class_course }}</td>
+                <td>{{ class.class_semester }}</td>
+                <td class="actions">
+                    <form action="/edit_class/{{ class.class_id }}" method="get" style="display:inline;">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="/delete_class/{{ class.class_id }}" method="post" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1>Add Classes</h1>
+      
+      <!-- Form to add new class -->
+      <form action="/add_classes" method="post">
+          <label for="class_name">Class Name:</label>
+          <input type="text" id="class_name" name="class_name" required>
+    
+          <label for="class_strength">Class Strength:</label>
+          <input type="number" id="class_strength" name="class_strength" required>
+    
+          <label for="class_course">Class Course:</label>
+          <input type="text" id="class_course" name="class_course" required>
+    
+          <label for="class_semester">Class Semester:</label>
+          <input type="text" id="class_semester" name="class_semester" required>
+    
+          <button type="submit">Add Class</button>
+      </form>
+</div>
+
+</section>
+{%endblock%}
+
+

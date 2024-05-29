@@ -1,0 +1,40 @@
+*{
+    font-family: "manrope";
+    padding-right: 0.5px;
+}
+body{
+    margin: 0px;
+    height: 100%;
+}
+.orange-el{
+    color: #df9f7d;
+}
+.top-bar{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 110px;
+    color: antiquewhite;
+    font-size: larger;
+    position: fixed;
+    margin-top: -22px;
+    /* width: 100vh; */
+}
+
+.logo{
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%; 
+}
+
+#top-text{
+    display: block;
+    font-size: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+}
+

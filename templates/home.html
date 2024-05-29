@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{%block head%}<link rel="stylesheet" href="{{url_for('static',filename='css/home.css') }}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<title>{{session['name']}}</title>
+<script>
+  
+// Function to update the clock
+function updateClock() {
+    var now = new Date();
+    var hours = now.getHours().toString().padStart(2, '0');
+    var minutes = now.getMinutes().toString().padStart(2, '0');
+    var timeString = hours + ':' + minutes ;
+    document.getElementById('time-heading').innerHTML = timeString;
+}
+
+// Update the clock every second
+setInterval(updateClock);
+
+// Initial call to display the clock immediately
+updateClock();
+    
+</script>
+{%endblock%}
+{%block body%}
+<section class="sec1" style="height: 120vh;">
+    <nav class="menu" tabindex="0">
+      <header class="avatar">
+            <img src="{{ url_for('static',filename='assets/user-icon.png') }}" />
+        <h2>{{session['name']}}</h2>
+      </header>
+        <ul>
+        <li  class="selected"><span>Home</span></li>
+        <a href="h_attendance" id="n-links"><li class="icon-dashboard"><span>Take Attendance</span></li></a>
+        <a href="h_students" id="n-links"><li class="icon-dashboard"><span>Student details</span></li></a>
+        <a href="h_manageclass" id="n-links"><li class="icon-customers"><span>Manage classes</span></li></a>
+        <a href="h_myprofile" id="n-links"><li class="icon-settings"><span>My profile</span></li></a>
+        <a href="logout" id="n-links"><li class="icon-settings"><span>Log-Out</span></li></a>
+      </ul>
+    </nav>
+
+    <div class="mainarea">
+      <p id="time-heading" "></p>
+      <div class="container">
+        <h1 style="padding-bottom: 20px;font-weight: bold;">Class Schedule</h1>
+        <table class="table table-striped"  >
+          <thead class="thead-dark">
+            <tr>
+              <th>Class Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Day of Week</th>
+                    <th>Completed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for class in classes %}
+                <tr>
+                  <td>{{ class.class_name }}</td>
+                  <td>{{ class.start_time }}</td>
+                    <td>{{ class.end_time }}</td>
+                    <td>{{ class.day_of_week }}</td>
+                    <td>
+                      <form method="POST" action="{{ url_for('update_completion', class_id=class.id) }}">
+                        <input type="checkbox" name="completed" onChange="this.form.submit()" {% if class.completed %}checked{% endif %}>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <a href="add_class" class="btn btn-primary" style="float: right;">+ Add Schedule</a>
+              <br><br>
+              
+              <div class="announcements">
+                <h3>Announcements</h3>
+                <marquee behavior="" direction="down" scrollamount="3">
+                <div class="announcement-item">
+                  <div class="announcement-title">New Policy Update</div>
+                  <div class="announcement-date">May 15, 2024</div>
+                  <div class="announcement-content">
+                    Please be informed about the new policy updates effective from next month.
+                  </div>
+              </div>
+              <div class="announcement-item">
+                  <div class="announcement-title">Upcoming Event</div>
+                  <div class="announcement-date">May 18, 2024</div>
+                  <div class="announcement-content">
+                    Join us for the annual teacher's conference this weekend.
+                  </div>
+                </div>
+              </div>
+            </marquee>
+            </div>
+    </div>
+</section>
+{%endblock%}

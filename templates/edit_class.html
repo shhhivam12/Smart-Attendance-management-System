@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Class</title>
+    <style>
+        /* CSS for Edit Class Form */
+.edit-class-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-class-form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.edit-class-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.edit-class-form input[type="text"],
+.edit-class-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.edit-class-form button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-class-form button:hover {
+    background-color: #45a049;
+}
+    </style>
+</head>
+<body>
+        <form action="/edit_class/{{ class_data.class_id }}" method="post" class="edit-class-form">
+            <h1>Edit Class</h1>
+            <label for="class_name">Class Name:</label>
+            <input type="text" id="class_name" name="class_name" value="{{ class_data.class_name }}" required><br>
+            
+            <label for="class_strength">Class Strength:</label>
+        <input type="number" id="class_strength" name="class_strength" value="{{ class_data.class_strength }}" required><br>
+        
+        <button type="submit">Update Class</button>
+    </form>
+</body>
+</html>

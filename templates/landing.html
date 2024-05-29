@@ -1,0 +1,79 @@
+{% extends 'base.html'%}
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/land.css') }}">
+{%endblock%}
+{%block body%}
+
+<section class="sec1">
+    <div class=sec1-maindiv>
+        <h1 id="sec1-h1">Smart Attendance Management System Using Face Recognition
+        </h1>
+        <h3>Welcome to <span class="orange-el">Graphic Era's</span> Smart Attendance Management System! </h3><br>
+
+        Revolutionizing the way we track attendance with my web-app solution designed specifically for Graphic Era.
+        <span class="orange-el">Smart Attendance Management System</span> leverages the latest advancements in
+        technology of computer vision to streamline the attendance-taking process, making it more efficient, accurate, and hassle-free for
+        both students and faculty.</h3>
+        <div>
+            <a href="login"><button class="section2_btn btn6" type="button">Log-In</button></a>
+
+            <a href="signup"><button class="section2_btn btn66" type="button">Sign-Up</button></a>
+        </div>
+    </div>
+</section>
+
+<section class="sec2" >
+    <div id="sec2-maindiv">
+        <div id="sec2-d1">
+            <img src="static/assets/land_gif.gif" alt="a gif" width="86%" id="myimg">
+        </div>
+
+        <div id="sec2-d2" data-aos="fade-in">
+            <h1 style="text-align:end;">How does it works?</h1>
+            <p>The core concepts used in SAMS is facial recognition which is implemented through popular computer
+                vision library - OpenCv. In this project i am using python to implement OpenCv in web with the help of
+                html, css and javascript. The backend of this project is handled by Flask. This project aims at reducing
+                the time overrheads inccured through traditional ways of taking attendance in schools and colleges by
+                automating the process which matches faces of students through computer vision and provide the faculty
+                with the roll numbers of the students at the end of the class</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="sec1">
+    <h1 style="text-align: center; font-size: 60px;margin-top: 0%;">Tech-Stack used</h1>
+    <div class="stack-icons">
+        <img src="{{ url_for('static',filename='assets/webicon.png') }}" class="icons" alt="web tech">
+        <img src="{{ url_for('static',filename='assets/pyhton.png') }}" class="icons" alt="python">
+        <img src="{{ url_for('static',filename='assets/flask.png') }}" class="icons" alt="flask">
+        <img src="{{ url_for('static',filename='assets/openCv.png') }}" class="icons" alt="opencv">
+        <img src="{{ url_for('static',filename='assets/sql.png') }}" class="icons" alt="Mysql">
+    </div>
+
+</section>
+
+<section class="sec2">
+    <div class="sec4maindiv">
+        <div id="sec2-d2">
+            <h1>Who is me?😽</h1>
+            My name is shivam mahendru currently pursuing my bachelor's in computer application.This webapp is a part of
+            my 2nd semester mini-project. My hobbies are reading, working out and petting cats!. You can know more about
+            me on my socials mentioned below. That's all thanks for reading, Hope you have a great day.
+            <div id="social-test">
+                <ul class="social">
+                    <li><a href="https://github.com/shhhivam12" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/shivam-mahendru-5b212b203/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.instagram.com/shiiivam_012/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="sec2-d1">
+            <img src="{{ url_for('static',filename='assets/shivam.jpg') }}" width="82%" alt="" id="myimg">
+        </div>
+    </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</section>
+
+{%endblock%}

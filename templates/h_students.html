@@ -1,0 +1,75 @@
+{% extends 'base.html'%}
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/home.css') }}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/h_students.css') }}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+{%endblock%}
+{%block body%}
+<nav class="menu" tabindex="0">
+    <header class="avatar">
+          <img src="{{ url_for('static',filename='assets/user-icon.png') }}" />
+      <h2>{{session['name']}}</h2>
+    </header>
+      <ul>
+        <a href="home"><li ><span>Home</span></li></a>
+      <a href="h_attendance" id="n-links"><li class="icon-dashboard"><span>Take Attendance</span></li></a>
+      <li class="selected"><span>Student details</span></li>
+      <a href="h_manageclass" id="n-links"><li class="icon-customers"><span>Manage classes</span></li></a>
+      <a href="h_myprofile" id="n-links"><li class="icon-settings"><span>My profile</span></li></a>
+      <a href="logout" id="n-links"><li class="icon-settings"><span>Log-Out</span></li></a>
+    </ul>
+  </nav>
+  <div class="container">
+    <h1>Student Details</h1>
+
+    <div class="form-section">
+        <h2>Select Class</h2>
+        <form method="get" action="{{ url_for('students') }}">
+            <label for="class_name">Select Class:</label>
+            <select name="class_name" id="class_name" onchange="this.form.submit()">
+                {% for class in class_dirs %}
+                    <option value="{{ class }}" {% if class == selected_class %}selected{% endif %}>{{ class }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <div class="student-details">
+        <h2>Students in {{ selected_class }}</h2>
+        {% for student in student_details %}
+            <div class="student-card">
+                <img src="{{ url_for('static', filename='classes/' ~ selected_class ~ '/' ~ student.filename) }}" alt="{{ student.name }}">
+                <div>
+                    <p>Roll No: {{ student.rollno }}</p>
+                    <p>Name: {{ student.name }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="form-section">
+        <h2>Add New Student</h2>
+        <form method="post" enctype="multipart/form-data" action="{{ url_for('students') }}">
+            <label for="class_name">Select Class:</label>
+            <select name="class_name" id="class_name">
+                {% for class in class_dirs %}
+                    <option value="{{ class }}" {% if class == selected_class %}selected{% endif %}>{{ class }}</option>
+                {% endfor %}
+            </select>
+            <label for="file">Upload Student Photos:</label>
+                <input type="file" name="files[]" id="file" multiple required>
+                <p style="color: rgb(255, 0, 0);">** Please upload image/images with format : (Student-Rollnumber)_(Student-name).(jpg/jpeg/png) , e.x. : 66_shivam mahendru.png</p>
+                <button type="submit">Upload</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#class_name').change(function() {
+            this.form.submit();
+        });
+    });
+</script>
+{%endblock%}

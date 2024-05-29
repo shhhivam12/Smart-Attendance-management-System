@@ -1,0 +1,9 @@
+flask
+opencv-python
+werkzeug.security 
+mysql.connector
+cv2
+face_recognition
+threading
+os
+shutil

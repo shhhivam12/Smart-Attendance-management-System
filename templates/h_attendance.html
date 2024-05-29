@@ -1,0 +1,122 @@
+{% extends 'base.html'%}
+{%block head%}
+<title>{{session['name']}}:attendance</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/home.css') }}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/h_attendance.css') }}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function copy(){
+    var copyText = document.getElementById("roll_numbers");
+    copyText.select();
+    navigator.clipboard.writeText(copyText.value);
+    alert("Copied the roll numbers to  your clipboard : " + copyText.value);
+  }
+
+$(document).ready(function() {
+
+            $('#stop-button').click(function() {
+                $.ajax({
+                    url: '/stop_face_recognition',
+                    method: 'GET',
+                    success: function(response) {
+                        alert(response.status);
+                    },
+                    error: function(error) {
+                        console.error('Error stopping face recognition:', error);
+                    }
+                });
+            });
+        });
+
+  function getchange() {
+    let option = document.getElementById('classname').value
+    var divlist = {{ classlist | tojson }}
+    
+    for (i = 0; i < divlist.length; i++) {
+      if (divlist[i].class_name == option) {
+      document.getElementById('classnm').innerHTML = `Class : ${divlist[i].class_name}`
+      document.getElementById('stren').innerHTML = `Total Strength : ${divlist[i].class_strength}`
+    }
+  }
+}
+let stcount = document.getElementById("stcount")
+function updateRollNumbers() {
+            $.ajax({
+                url: "/get_roll_numbers",
+                type: "GET",
+                success: function(response) {
+                    var rollNumbers = response.roll_numbers;
+                    $('#student-count').text(`Total present : ${response.length}`);
+                    $('#roll_numbers').val(rollNumbers.join(', '));
+                },
+                error: function(error) {
+                    console.error("Error fetching roll numbers:", error);
+                }
+            });
+        }
+        setInterval(updateRollNumbers, 1000);
+        updateRollNumbers();
+
+
+</script>
+{%endblock%}
+{%block body%}
+<section class="sec1">
+  <nav class="menu" tabindex="0">
+    <header class="avatar">
+      <img src="{{ url_for('static',filename='assets/user-icon.png') }}" />
+      <h2>{{session['name']}}</h2>
+    </header>
+    <ul>
+      <a href="home">
+        <li tabindex="0" class="icon-users"><span>Home</span></li>
+      </a>
+      <li tabindex="0" class="selected"><span>Take Attendance</span></li>
+      <a href="h_students" id="n-links"><li class="icon-dashboard"><span>Student details</span></li></a>
+      <a href="h_manageclass">
+        <li tabindex="0" class="icon-customers"><span>Manage classes</span></li>
+      </a>
+      <a href="h_myprofile">
+        <li tabindex="0" class="icon-settings"><span>My profile</span></li>
+      </a>
+      <a href="logout">
+        <li class="icon-settings"><span>Log-Out</span></li>
+      </a>
+    </ul>
+  </nav>
+
+  <h1 style="margin-left: 200px;margin-top: -10px;font-weight: bolder;">Live Attendance :</h1>
+  <div class="container">
+    {% if flag %}
+      <img src="{{ url_for('video') }}" width="40%" alt="Please Wait" style="margin-left: 70px; margin-top: -30px;"/>
+    {%else%}
+      <h2 style="padding-left: 150px;">Please select your current class</h2> 
+    {%endif%}
+      <div id="attenddiv">
+      {% if not flag %}
+      <h2 id="classnm">Select your class to get started : </h2>
+        <div>
+          <form action="/selected_class" method="post">
+      <b>Select class :</b>
+      <select name="selectclass" id="classname" onchange="getchange()"  onfocus="this.selectedIndex = -1;">
+        <option value="-1">Select class</option>
+        {% for i in classlist %}
+        <option value='{{i.class_name}}''>{{i.class_name}}</option>
+        {% endfor %}
+      </select>
+        <input type="submit" value="Start" id="form_butt">
+      </form>
+      </div>
+      {%else%}
+        <h1>Class : {{class_name}}</h1>
+      {%endif%}
+      <h1>Roll No. : </h1>
+      <textarea name="" id="roll_numbers">{% for items in list%}{{items}}{%if not loop.last%},{%endif%}{% endfor %}</textarea>
+      <h3 id="student-count">Total Student present : {{list|count}}</h3>
+      <h3 id="stren"></h3>
+      <button id="stop-button">Stop</button>
+      <button id="copy-button" onclick="copy()">Copy to Clipboard</button>
+    </div>
+  </div>
+</section>
+{%endblock%}

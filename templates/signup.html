@@ -1,0 +1,46 @@
+
+{% extends 'base.html'%}
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/signup.css') }}">{%endblock%}
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+{%block body%}
+<h1>Signup</h1>
+<section class="container forms">
+    <div class="form signup">
+        <h1>Sign-up</h1>
+        <div class="form-content">
+            <form action="/validate" method="post">
+                <div class="field input-field">
+                    <input type="text" placeholder="Name" name="name" class="input" required>
+                </div>
+                <div class="field input-field">
+                    <input type="email" placeholder="Email" name="mail" class="input" required>
+                </div>
+                <div class="field input-field">
+                    <input type="password" placeholder="Create password" name="pass" class="password" required>
+                </div>
+                <div class="field input-field">
+                    <input type="password" placeholder="Confirm password" name="confirm" class="password" required>
+                </div>
+                <div class="field button-field">
+                    <button type="submit">Signup</button>
+                </div>
+            </form>
+            <div class="form-link">
+                <span>Already have an account? <a href="login" class="link login-link">Login</a></span>
+            </div>
+            {% if status == "short"%}
+                <div class="alert" role="alert">*Passwords is too short</div>
+                {% endif %}
+            {% if status == "unmatch"%}
+                <div class="alert" role="alert">*Passwords do not match</div>
+                {% endif %}
+            {% if status == "error"%}
+                <div class="alert" role="alert">*some error occured</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</section>
+{%endblock%}
